@@ -193,7 +193,6 @@ export default class IntlPhoneInput extends React.Component {
   }
 
   render() {
-    const { flag } = this.state;
     const {
       containerStyle,
       flagStyle,
@@ -204,8 +203,14 @@ export default class IntlPhoneInput extends React.Component {
       placeholder,
       showCountryBox,
       showInput,
-      value
+      value,
+      defaultCountry
     } = this.props;
+
+    const selectedCountry = data.filter((obj) => obj.code === defaultCountry)[0] || {};
+
+    const flag = selectedCountry.flag || this.state.flag
+    const dialCode = selectedCountry.dialCode || this.state.dialCode;
 
     return (
       <View>
@@ -213,9 +218,9 @@ export default class IntlPhoneInput extends React.Component {
           showCountryBox &&
           <TouchableOpacity style={{ ...containerStyle }} onPress={() => this.showModal()}>
             <View style={styles.openDialogView}>
-              {!!!(flag && this.state.dialCode) && <TextInput style={[phoneInputStyle]} editable={false} placeholder={placeholder}/>}
+              {!!!(flag && dialCode) && <TextInput style={[phoneInputStyle]} editable={false} placeholder={placeholder}/>}
               <Text style={[styles.flagStyle, flagStyle]}>{flag}</Text>
-              <Text style={[styles.dialCodeTextStyle, dialCodeTextStyle]}>{this.state.dialCode}</Text>
+              <Text style={[styles.dialCodeTextStyle, dialCodeTextStyle]}>{dialCode}</Text>
             </View>
           </TouchableOpacity>
         }
