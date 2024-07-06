@@ -31,6 +31,44 @@ This package is a fork of the original `react-native-intl-phone-input` with seve
 5. **Minor UI Changes:**
     - The code removes some commented-out styles, likely for the border color of the country modal items.
 
+#### This usage creates a visual component for users to select their country
+```javascript
+import CountryPhonePicker from "rn-country-phone-picker";
+
+<CountryPhonePicker
+  showCountryBox={true}  // Display the country selection box
+  showInput={false}     // Hide the phone number input field
+  phoneInputStyle={styles.selectBox}  // Style for the selection box
+  containerStyle={styles.countryBox}  // Style for the entire country box
+  flagStyle={styles.countryCode}      // Style for the country flag
+  dialCodeTextStyle={styles.callingCode} // Style for the dial code text
+  defaultCountry={countryCode}      // Set the default country based on `countryCode`
+  lang={locale}                        // Set the language for country names based on `locale`
+  filterText={I18n.t("countrySearchBoxPlaceholder", { locale })}  // Placeholder text for the country search box (localized)
+  closeText={I18n.t("countrySearchBoxCloseText", { locale })}    // Text for the close button (localized)
+  placeholder={I18n.t("countryBoxPlaceholder", { locale })}      // Placeholder text for the selection box (localized)
+  onSelectCountry={onSelect}            // Callback function for country selection
+/>
+```
+
+#### This usage creates a phone number input field where users can enter their phone number.
+```javascript
+<CountryPhonePicker
+  showInput={true}        // Display the phone number input field
+  showCountryBox={false}  // Hide the country selection box
+  inputProps={{
+    autoFocus: !!(callingCode && countryCode),  // Set auto-focus if dial code and country code are provided
+    editable: !!(callingCode && countryCode),   // Enable editing only if dial code and country code are provided
+  }}
+  numberOfLines={1}        // Limit to a single line
+  placeholder={I18n.t("phoneNumberPlaceholder", { locale })}  // Localized placeholder text (e.g., "Phone number")
+  phoneInputStyle={styles.input}            // Style for the input field (using `styles`)
+  defaultCountry={countryCode}      // Set the default country based on `countryCode`
+  value={phoneNumber}          // Set the initial phone number value
+  onChangeText={onChangeText}     // Callback function for phone number changes
+/>
+```
+
 Overall, the changes improve the functionality and error handling of the `IntlPhoneInput` component. It provides a better user experience for entering and managing international phone numbers.
 
 
