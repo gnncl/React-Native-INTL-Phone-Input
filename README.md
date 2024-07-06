@@ -2,8 +2,6 @@
 
 It's an international phone input with country selection and phone mask for React Native.
 
-![](mgif.gif)
-
 ## New Version Information
 
 This package is a fork of the original `react-native-intl-phone-input` with several modifications and improvements. We've made changes to enhance functionality, improve performance, and add new features. As a result, we're continuing with a new version under this new package name.
@@ -69,7 +67,10 @@ import CountryPhonePicker from "rn-country-phone-picker";
 />
 ```
 
-Overall, the changes improve the functionality and error handling of the `IntlPhoneInput` component. It provides a better user experience for entering and managing international phone numbers.
+Overall, the changes improve the functionality and error handling of the `CountryPhonePicker` component. It provides a better user experience for entering and managing international phone numbers.
+
+
+![](mgif.gif)
 
 
 ## Installation
