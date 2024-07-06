@@ -8,11 +8,31 @@ It's an international phone input with country selection and phone mask for Reac
 
 This package is a fork of the original `react-native-intl-phone-input` with several modifications and improvements. We've made changes to enhance functionality, improve performance, and add new features. As a result, we're continuing with a new version under this new package name.
 
-Key changes include:
-- [List your key changes/improvements here]
-- [For example: Improved country selection UI]
-- [Added support for custom styling]
-- [Enhanced phone number validation]
+![](image.png)
+
+1. **Handling Default Country:**
+    - The code now checks if a `defaultCountry` prop is provided. If not, it uses the country with code 'TR' as the default.
+    - It initializes the state with the default country's details like dial code, flag, and mask.
+
+2. **Input Mask and Phone Number Validation:**
+    - The `onChangeText` function handles user input in the phone number field.
+    - It counts the number of digits ('9') in the mask and validates the entered phone number length against the mask.
+    - It calls the `onChangePropText` function to update the parent component with the formatted phone number and validation status.
+
+3. **Country Selection Modal:**
+    - The code updates the modal visibility based on the `disableCountryChange` prop. If `true`, the modal won't be shown.
+    - Selecting a country in the modal updates the state with the selected country's details and calls the `onSelectCountry` prop function if provided.
+    - In case of errors, it falls back to the default country.
+
+4. **Country Filtering:**
+    - The `filterCountries` function filters the list of countries based on the search term entered by the user.
+    - It searches by country name, dial code, or code (uppercase).
+
+5. **Minor UI Changes:**
+    - The code removes some commented-out styles, likely for the border color of the country modal items.
+
+Overall, the changes improve the functionality and error handling of the `IntlPhoneInput` component. It provides a better user experience for entering and managing international phone numbers.
+
 
 ## Installation
 
