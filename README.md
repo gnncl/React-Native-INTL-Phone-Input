@@ -1,106 +1,133 @@
-# React-Native-INTL-Phone-Input
-It's an international phone input with phone mask. 
+# rn-country-phone-picker
+
+It's an international phone input with country selection and phone mask for React Native.
 
 ![](mgif.gif)
 
+## New Version Information
 
-# USAGE
+This package is a fork of the original `react-native-intl-phone-input` with several modifications and improvements. We've made changes to enhance functionality, improve performance, and add new features. As a result, we're continuing with a new version under this new package name.
 
-install npm library
-```
-npm install react-native-intl-phone-input
-```
+Key changes include:
+- [List your key changes/improvements here]
+- [For example: Improved country selection UI]
+- [Added support for custom styling]
+- [Enhanced phone number validation]
 
+## Installation
 
-İmport library
+Install the package via npm:
+
 ```
-import IntlPhoneInput from 'react-native-intl-phone-input';
-```
-use component
-```
-  onChangeText = ({dialCode, unmaskedPhoneNumber, phoneNumber, isVerified}) => {
-    console.log(dialCode, unmaskedPhoneNumber, phoneNumber, isVerified);
-  };
-  render() {
-    return (
-      <SafeAreaView>
-        <IntlPhoneInput onChangeText={this.onChangeText} defaultCountry="TR" renderAction={() => <Text>XX</Text>} />
-      </SafeAreaView>
-    );
-  }
+npm install rn-country-phone-picker
 ```
 
+## Usage
 
+Import the component:
 
-Custom Modal Example
+```javascript
+import CountryPhonePicker from 'rn-country-phone-picker';
 ```
- renderCustomModal=(modalVisible, countries, onCountryChange) => (
-    <Modal visible={modalVisible}>
-      <SafeAreaView style={{ flex: 1 }}>
+
+Use the component:
+
+```javascript
+onChangeText = ({dialCode, unmaskedPhoneNumber, phoneNumber, isVerified}) => {
+  console.log(dialCode, unmaskedPhoneNumber, phoneNumber, isVerified);
+};
+
+render() {
+  return (
+    <SafeAreaView>
+      <CountryPhonePicker 
+        onChangeText={this.onChangeText} 
+        defaultCountry="TR" 
+        renderAction={() => <Text>XX</Text>} 
+      />
+    </SafeAreaView>
+  );
+}
+```
+
+## Custom Modal Example
+
+```javascript
+renderCustomModal = (modalVisible, countries, onCountryChange) => (
+  <Modal visible={modalVisible}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View>
         <View>
-          <View>
-            <TextInput placeholder="Search" />
-            <Text>🔍</Text>
-          </View>
-          <FlatList
-            style={{ flex: 1 }}
-            data={countries}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <TouchableWithoutFeedback onPress={() => onCountryChange(item.code)}>
-                <Text>{item['your language code here for example tr']}</Text>
-              </TouchableWithoutFeedback>
-            )}
-          />
+          <TextInput placeholder="Search" />
+          <Text>🔍</Text>
         </View>
-        <TouchableOpacity onPress={() => this.phoneInput.hideModal()}>
-          <Text>CLOSE</Text>
-        </TouchableOpacity>
-      </SafeAreaView>
-    </Modal>
-  )
+        <FlatList
+          style={{ flex: 1 }}
+          data={countries}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <TouchableWithoutFeedback onPress={() => onCountryChange(item.code)}>
+              <Text>{item['your language code here for example tr']}</Text>
+            </TouchableWithoutFeedback>
+          )}
+        />
+      </View>
+      <TouchableOpacity onPress={() => this.phoneInput.hideModal()}>
+        <Text>CLOSE</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
+  </Modal>
+)
 
-  render(){
-    return <IntlPhoneInput
-        ref={(ref) => this.phoneInput = ref}
-        customModal={this.renderCustomModal}
-        defaultCountry="TR"
-        lang="TR"
-      />;
-  }
-
+render() {
+  return (
+    <CountryPhonePicker
+      ref={(ref) => this.phoneInput = ref}
+      customModal={this.renderCustomModal}
+      defaultCountry="TR"
+      lang="TR"
+    />
+  );
+}
 ```
 
+## Supported Languages
 
+| Code | Language |
+|------|----------|
+| TR   | Turkish  |
+| LT   | Lithuanian |
+| EN   | English  |
+| RU   | Russian  |
 
-Supported Languages |  |
---- | --- |
-TR | Turkish |
-LT | Lithuanian |
-EN | English |
-RU | Russian |
+## Props
 
+| Prop Name | Type | Default | Description |
+|-----------|------|---------|-------------|
+| lang | String | | Translate country name on modal |
+| placeholder | String | | Phone input placeholder |
+| defaultCountry | String | TR | Default country code |
+| mask | String | | Custom mask for phone number |
+| onChangeText | Function | | Callback when input text changes |
+| customModal | Function | | Generate custom modal for country selection |
+| phoneInputStyle | Style | | Style for the phone input TextInput |
+| containerStyle | Style | | Style for the container |
+| dialCodeTextStyle | Style | | Style for the dial code text |
+| flagStyle | Style | | Style for the country flag |
+| modalContainer | Style | | Style for the modal's SafeAreaView |
+| filterInputStyle | Style | | Style for the filter input in modal |
+| closeButtonStyle | Style | | Style for the close button text |
+| modalCountryItemCountryNameStyle | Style | | Style for country names in modal |
+| filterText | String | Filter | Placeholder text for filter input |
+| closeText | String | CLOSE | Text for close button |
+| disableCountryChange | Boolean | false | Disable country selection |
+| renderAction | Function | | Render component to the right of phone input |
+| placeholderTextColor | String | black | Color for placeholder text |
 
+## Contributing
 
-prop names |type |default value | comment 
---- | --- | --- | --- 
-lang | String |  | Translate country name on modal
-placeholder | String |  | This prop change the phone input placeholder
-defaultCountry | String | TR | You can change your default country code 
-mask | String |  | You can set custom mask
-onChangeText | Function |  | This function works when input text is changed 
-customModal | Function |  | Generate your custom modal
-phoneInputStyle | Style |  | This prop is about the text field's ReactNative.TextInput style 
-containerStyle | Style |  | This prop is about the text field's container style 
-dialCodeTextStyle | Style |  |  
-flagStyle | Style |  |  
-modalContainer | Style |  | This prop is about the modal field's SafeAreaView style.
-filterInputStyle | Style |  | This prop is about the top of model filter text style 
-closeButtonStyle | Style |  | This prop is about text style of bottom modal
-modalCountryItemCountryNameStyle | Style |  |  
-filterText | String | Filter | This is the text of placeholder input of top modal 
-closeText | String | CLOSE | This prop is about the text of bottom modal 
-disableCountryChange | Bool | false | This prop is about disable open select country modal
-renderAction | Function |  | This prop attaching a component right of phone input
-placeholderTextColor | String | black | This prop allows you to assign a color to the placeholderText
+Contributions are welcome! Please feel free to submit a Pull Request.
 
+## License
+
+This project is licensed under the MIT License.
