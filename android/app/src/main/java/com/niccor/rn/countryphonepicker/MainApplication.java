@@ -1,4 +1,4 @@
-package com.reactnativephoneinput;
+package com.niccor.rn.countryphonepicker;
 
 import android.app.Application;
 import android.content.Context;

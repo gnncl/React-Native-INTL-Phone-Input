@@ -1,4 +1,4 @@
-package com.reactnativephoneinput;
+package com.niccor.rn.countryphonepicker;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "reactNativePhoneInput";
+    return "rn-country-phone-picker";
   }
 }

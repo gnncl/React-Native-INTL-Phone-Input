@@ -1,16 +1,16 @@
 {
-  "_from": "rn-phone-number-picker@^0.0.1",
-  "_id": "rn-phone-number-picker@0.0.1",
+  "_from": "rn-country-phone-picker@^0.0.1",
+  "_id": "rn-country-phone-picker@0.0.1",
   "_inBundle": false,
   "_integrity": "sha512-+IZRv7TqbG2iCmcyDZsD/AW3rn3T2czp3r3IIFF7qcsPxEezBo88iTJmtouWpcEVIGNEZBmrOeb97HYQEB7Dkw==",
-  "_location": "/rn-phone-number-picker",
+  "_location": "/rn-country-phone-picker",
   "_phantomChildren": {},
   "_requested": {
     "type": "range",
     "registry": true,
-    "raw": "rn-phone-number-picker@^0.0.1",
-    "name": "rn-phone-number-picker",
-    "escapedName": "rn-phone-number-picker",
+    "raw": "rn-country-phone-picker@^0.0.1",
+    "name": "rn-country-phone-picker",
+    "escapedName": "rn-country-phone-picker",
     "rawSpec": "^0.0.1",
     "saveSpec": null,
     "fetchSpec": "^0.0.1"
@@ -19,9 +19,9 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/rn-phone-number-picker/-/rn-phone-number-picker-0.0.1.tgz",
+  "_resolved": "https://registry.npmjs.org/rn-country-phone-picker/-/rn-country-phone-picker-0.0.1.tgz",
   "_shasum": "78a921724ce61784ecba5add33e2f5c8109378d1",
-  "_spec": "rn-phone-number-picker@^0.0.1",
+  "_spec": "rn-country-phone-picker@^0.0.1",
   "_where": "/Users/rostyslavbroslavskyi/Documents/projects/cloudbreak",
   "author": {
     "name": "Muhammed ALMAZ"
@@ -52,7 +52,7 @@
   ],
   "license": "MIT",
   "main": "index.js",
-  "name": "rn-phone-number-picker",
+  "name": "rn-country-phone-picker",
   "peerDependencies": {
     "react-native": ">= 0.25"
   },
