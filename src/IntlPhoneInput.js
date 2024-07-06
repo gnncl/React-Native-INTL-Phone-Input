@@ -146,9 +146,6 @@ export default class IntlPhoneInput extends React.Component {
       }
     }
 
-    // Kullanılmayan 9'ları boşlukla değiştir
-    formattedNumber = formattedNumber.replace(/9/g, ' ');
-
     return formattedNumber.trim();
   }
 
