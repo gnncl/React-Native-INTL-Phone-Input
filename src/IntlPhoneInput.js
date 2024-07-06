@@ -26,7 +26,8 @@ export default class IntlPhoneInput extends React.Component {
       mask: props.mask || defaultCountry.mask,
       countryData: data,
       selectedCountry: defaultCountry,
-      placeholderTextColor: 'grey'
+      placeholderTextColor: 'grey',
+      lastTextLength: 0
     };
   }
 
@@ -58,17 +59,29 @@ export default class IntlPhoneInput extends React.Component {
       return;
     }
 
-    let phoneNumber = this.state.mask.replace(/9/g, '_');
-    for (let index = 0; index < unmaskedPhoneNumber.length; index += 1) {
-      phoneNumber = phoneNumber.replace('_', unmaskedPhoneNumber[index]);
+    const unformattedText = unmaskedPhoneNumber.replace(/[^\d]/g, '');
+
+    let phoneNumber;
+
+    if (unformattedText.length - this.state.lastTextLength > 1) {
+      // Büyük olasılıkla bir yapıştırma işlemi gerçekleşti
+      phoneNumber = this.formatPastedInput(unformattedText, this.state.mask);
+    } else {
+      // Normal giriş
+      phoneNumber = this.formatManualInput(unformattedText, this.state.mask);
     }
+
+    this.setState({ lastTextLength: unformattedText.length });
+
     let numberPointer = 0;
+
     for (let index = phoneNumber.length; index > 0; index -= 1) {
       if (phoneNumber[index] !== ' ' && !isNaN(phoneNumber[index])) {
         numberPointer = index;
         break;
       }
     }
+
     phoneNumber = phoneNumber.slice(0, numberPointer + 1);
     unmaskedPhoneNumber = (phoneNumber.match(/\d+/g) || []).join('');
 
@@ -115,6 +128,44 @@ export default class IntlPhoneInput extends React.Component {
         this.props.onSelectCountry(defaultCountry);
       }
     }
+  }
+
+  formatPastedInput = (input, mask) => {
+    // Tüm boşlukları ve özel karakterleri kaldır
+    const cleanNumber = input.replace(/[^\d]/g, '');
+
+    let formattedNumber = mask;
+    let numberIndex = cleanNumber.length - 1;
+
+    // Maskeden sağdan sola doğru ilerle
+    for (let i = mask.length - 1; i >= 0 && numberIndex >= 0; i--) {
+      if (mask[i] === '9') {
+        // Eğer maske karakteri '9' ise, temizlenmiş numaradan bir rakam ekle
+        formattedNumber = formattedNumber.substring(0, i) + cleanNumber[numberIndex] + formattedNumber.substring(i + 1);
+        numberIndex--;
+      }
+    }
+
+    // Kullanılmayan 9'ları boşlukla değiştir
+    formattedNumber = formattedNumber.replace(/9/g, ' ');
+
+    return formattedNumber.trim();
+  }
+
+  formatManualInput = (input, mask) => {
+    let formattedNumber = '';
+    let inputIndex = 0;
+
+    for (let i = 0; i < mask.length && inputIndex < input.length; i++) {
+      if (mask[i] === '9') {
+        formattedNumber += input[inputIndex];
+        inputIndex++;
+      } else {
+        formattedNumber += mask[i];
+      }
+    }
+
+    return formattedNumber;
   }
 
   filterCountries = async (value) => {
